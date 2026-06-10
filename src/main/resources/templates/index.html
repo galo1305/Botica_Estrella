@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="es" class="bg-slate-50 scroll-smooth">
+<html
+  lang="es"
+  class="bg-slate-50 scroll-smooth"
+  xmlns:th="http://www.thymeleaf.org"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,7 +93,7 @@
 
           <div class="flex-1 max-w-3xl w-full">
             <form
-              action="/productos"
+              th:action="@{/productos}"
               method="GET"
               class="relative group flex items-center"
             >
@@ -127,18 +131,18 @@
 
           <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
             <a
-              href="/productos"
+              th:href="@{/productos}"
               class="hidden lg:block text-slate-500 hover:text-medical-blue font-bold px-3 py-2 transition-colors"
               >Catálogo</a
->
+            >
             <a
-              href="/perfil"
+              th:href="@{/perfil}"
               class="hidden lg:block text-slate-500 hover:text-medical-blue font-bold px-3 py-2 transition-colors"
               >Perfil</a
             >
 
             <a
-              href="/carrito"
+              th:href="@{/carrito}"
               class="relative p-2 text-slate-500 hover:text-medical-blue transition-colors group"
             >
               <svg
@@ -190,9 +194,13 @@
       <section
         class="carousel relative w-full h-[250px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-sm border border-slate-200 bg-slate-100 group"
       >
-        <img src="img/banner.png" class="carousel-img active" alt="Banner1" />
-        <img src="img/anuncio.jpg" class="carousel-img" alt="Banner2" />
-        <img src="img/banner3.jpg" class="carousel-img" alt="Banner3" />
+        <img
+          th:src="@{/img/banner.png}"
+          class="carousel-img active"
+          alt="Banner1"
+        />
+        <img th:src="@{/img/anuncio.jpg}" class="carousel-img" alt="Banner2" />
+        <img th:src="@{/img/banner3.jpg}" class="carousel-img" alt="Banner3" />
 
         <div
           class="absolute inset-0 bg-gradient-to-r from-medical-dark/50 to-transparent pointer-events-none z-10 flex items-center p-8 md:p-16"
@@ -203,7 +211,7 @@
               sin salir de casa
             </h1>
             <a
-              href="/productos"
+              th:href="@{/productos}"
               class="inline-block bg-medical-accent hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition-transform hover:scale-105 pointer-events-auto shadow-lg"
               >Comprar ahora</a
             >
@@ -235,7 +243,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <a
-            href="/productos"
+            th:href="@{/productos}"
             class="bg-white border border-slate-200 rounded-[1.5rem] p-6 shadow-sm hover:shadow-xl hover:border-medical-blue transition-all flex items-center gap-4 group cursor-pointer"
           >
             <div
@@ -255,7 +263,7 @@
             </div>
           </a>
           <a
-            href="/productos"
+            th:href="@{/productos}"
             class="bg-white border border-slate-200 rounded-[1.5rem] p-6 shadow-sm hover:shadow-xl hover:border-medical-blue transition-all flex items-center gap-4 group cursor-pointer"
           >
             <div
@@ -275,7 +283,7 @@
             </div>
           </a>
           <a
-            href="/productos"
+            th:href="@{/productos}"
             class="bg-white border border-slate-200 rounded-[1.5rem] p-6 shadow-sm hover:shadow-xl hover:border-medical-blue transition-all flex items-center gap-4 group cursor-pointer"
           >
             <div
@@ -314,7 +322,7 @@
             Destacados del Mes
           </h2>
           <a
-            href="/productos"
+            th:href="@{/productos}"
             class="text-medical-blue font-bold hover:underline text-sm hidden sm:block"
             >Ver todo el catálogo →</a
           >
@@ -330,11 +338,11 @@
               class="p-6 flex justify-center items-center h-52 bg-slate-50/50 rounded-t-[1.5rem]"
             >
               <a
-                href="detalle.html?producto=paracetamol"
+                th:href="@{/productos/1}"
                 class="w-full h-full flex justify-center items-center"
               >
                 <img
-                  src="img/paracetamol.png"
+                  th:src="@{/img/paracetamol.png}"
                   alt="Paracetamol"
                   class="max-h-36 object-contain group-hover:scale-110 transition-transform drop-shadow-md"
                 />
@@ -349,7 +357,7 @@
                 class="product-title text-base font-bold text-slate-800 leading-snug mb-4 line-clamp-2"
               >
                 <a
-                  href="detalle.html?producto=paracetamol"
+                  th:href="@{/productos/1}"
                   class="hover:text-medical-blue transition-colors"
                   >Paracetamol 120mg/5ml Jarabe Pediátrico</a
                 >
@@ -372,11 +380,11 @@
               class="p-6 flex justify-center items-center h-52 bg-slate-50/50 rounded-t-[1.5rem]"
             >
               <a
-                href="detalle.html?producto=oldSpice"
+                th:href="@{/productos/2}"
                 class="w-full h-full flex justify-center items-center"
               >
                 <img
-                  src="img/old_pieces.png"
+                  th:src="@{/img/old_pieces.png}"
                   alt="Old Spice"
                   class="max-h-36 object-contain group-hover:scale-110 transition-transform drop-shadow-md"
                 />
@@ -391,7 +399,7 @@
                 class="product-title text-base font-bold text-slate-800 leading-snug mb-4 line-clamp-2"
               >
                 <a
-                  href="detalle.html?producto=oldSpice"
+                  th:href="@{/productos/2}"
                   class="hover:text-medical-blue transition-colors"
                   >Pack 2 Desodorantes Barra Old Spice</a
                 >
@@ -416,11 +424,11 @@
               class="p-6 flex justify-center items-center h-52 bg-slate-50/50 rounded-t-[1.5rem]"
             >
               <a
-                href="detalle.html?producto=toallitas"
+                th:href="@{/productos/3}"
                 class="w-full h-full flex justify-center items-center"
               >
                 <img
-                  src="img/toallitas.png"
+                  th:src="@{/img/toallitas.png}"
                   alt="Toallitas Húmedas Ninet Plus"
                   class="max-h-36 object-contain group-hover:scale-110 transition-transform drop-shadow-md"
                 />
@@ -435,7 +443,7 @@
                 class="product-title text-base font-bold text-slate-800 leading-snug mb-4 line-clamp-2"
               >
                 <a
-                  href="detalle.html?producto=toallitas"
+                  th:href="@{/productos/3}"
                   class="hover:text-medical-blue transition-colors"
                   >Toallitas Húmedas Ninet Plus</a
                 >
@@ -454,7 +462,7 @@
 
         <div class="mt-8 text-center sm:hidden">
           <a
-            href="/productos"
+            th:href="@{/productos}"
             class="inline-block bg-white border-2 border-medical-blue text-medical-blue font-bold py-3 px-8 rounded-full"
             >Ver todo el catálogo</a
           >
@@ -492,21 +500,21 @@
           <ul class="space-y-3">
             <li>
               <a
-                href="#"
+                th:href="@{/}"
                 class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
                 >Inicio</a
               >
             </li>
             <li>
               <a
-                href="/productos"
+                th:href="@{/productos}"
                 class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
                 >Catálogo de Productos</a
               >
             </li>
             <li>
               <a
-                href="/nosotros"
+                th:href="@{/nosotros}"
                 class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
                 >Sobre Nosotros</a
               >

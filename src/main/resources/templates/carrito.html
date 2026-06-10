@@ -1,132 +1,691 @@
 <!doctype html>
-<html lang="es">
+<html
+  lang="es"
+  class="bg-slate-50 scroll-smooth"
+  xmlns:th="http://www.thymeleaf.org"
+>
   <head>
     <meta charset="UTF-8" />
-    <title>Carrito | Botica Estrella</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="logo/botica_estrella-logo.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Carrito | Botica Estrella 2026</title>
+    <link
+      rel="icon"
+      th:href="@{/logo/botica_estrella-logo.ico}"
+      type="image/x-icon"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              medical: {
+                blue: "#0d4d8b",
+                dark: "#0a3663",
+                light: "#f0f7ff",
+                accent: "#2ecc71",
+                border: "#e2e8f0",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f8fafc;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+    </style>
   </head>
 
-  <body class="cart-page">
-    <header class="navbar">
-      <div class="logo">
-        <img src="img/Botica.png" alt="Botica Estrella"/>
-      </div>
+  <body
+    class="text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-medical-blue selection:text-white"
+  >
+    <header
+      class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm transition-all"
+    >
+      <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20 gap-4">
+          <a
+            th:href="@{/}"
+            class="flex items-center gap-3 cursor-pointer flex-shrink-0"
+          >
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-medical-blue to-blue-400 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md"
+            >
+              ★
+            </div>
+            <span
+              class="text-xl md:text-2xl font-black text-medical-dark tracking-tight hidden sm:block"
+              >Botica Estrella</span
+            >
+          </a>
 
-      <div class="nav-actions">
-        <a href="productos.html" class="nav-item">
-          <img src="img/carrito.png" alt="Productos"/>
-          <span>Productos</span>
-        </a>
-        <a href="perfil.html" class="nav-item">
-          <img src="img/user.png" alt="Perfil"/>
-          <span>Perfil</span>
-        </a>
-        <a href="index.html" class="nav-item">
-          <img src="img/home.png" alt="Home"/>
-          <span>Home</span>
-        </a>
+          <div class="flex-1 max-w-3xl w-full">
+            <form
+              th:action="@{/productos}"
+              method="GET"
+              class="relative group flex items-center"
+            >
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+              >
+                <svg
+                  class="h-5 w-5 text-slate-400 group-focus-within:text-medical-blue transition-colors"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                name="buscar"
+                class="block w-full pl-12 pr-4 py-3 border-2 border-slate-100 rounded-full leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-4 focus:ring-medical-blue/10 focus:border-medical-blue transition-all font-medium"
+                placeholder="Buscar paracetamol, ibuprofeno, marcas..."
+              />
+              <button
+                type="submit"
+                class="absolute right-2 top-1.5 bottom-1.5 bg-medical-blue text-white px-5 rounded-full font-bold hover:bg-medical-dark transition-colors text-sm"
+              >
+                Buscar
+              </button>
+            </form>
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+            <a
+              th:href="@{/}"
+              class="hidden lg:block text-slate-500 hover:text-medical-blue font-bold px-3 py-2 transition-colors"
+              >Inicio</a
+            >
+            <a
+              th:href="@{/productos}"
+              class="hidden lg:block text-slate-500 hover:text-medical-blue font-bold px-3 py-2 transition-colors"
+              >Catálogo</a
+            >
+            <a
+              th:href="@{/perfil}"
+              class="hidden lg:block text-slate-500 hover:text-medical-blue font-bold px-3 py-2 transition-colors"
+              >Perfil</a
+            >
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="cart-container">
-      <h2>Mi Carrito</h2>
+    <main
+      class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-grow"
+    >
+      <div class="mb-8 flex items-center gap-3">
+        <div
+          class="w-12 h-12 bg-medical-blue text-white rounded-2xl flex items-center justify-center shadow-lg shadow-medical-blue/30"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            ></path>
+          </svg>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-black text-slate-800">
+          Mi Carrito de Compras
+        </h1>
+      </div>
 
-      <div class="cart-content">
-        <div class="cart-items">
-          <div class="cart-item">
-            <img src="img/paracetamol.png" alt="Paracetamol" />
-            <div class="item-info">
-              <p>Paracetamol 120mg/5ml Jarabe</p>
-              <span>S/. 2.00</span>
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="w-full lg:w-2/3 space-y-6">
+          <div
+            class="bg-white rounded-[2rem] shadow-sm border border-slate-200 p-6 flex flex-col sm:flex-row items-center gap-6 relative group"
+          >
+            <button
+              class="absolute top-4 right-4 sm:relative sm:top-0 sm:right-0 w-8 h-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors"
+              title="Eliminar producto"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+
+            <div
+              class="w-24 h-24 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center p-2 flex-shrink-0"
+            >
+              <img
+                th:src="@{/img/paracetamol.png}"
+                alt="Paracetamol"
+                class="max-w-full max-h-full object-contain mix-blend-multiply"
+              />
             </div>
-            <div class="item-quantity">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
+
+            <div class="flex-grow text-center sm:text-left">
+              <h3 class="font-bold text-slate-800 text-lg mb-1">
+                Paracetamol 120mg/5ml Jarabe
+              </h3>
+              <p class="text-medical-blue font-black text-xl">S/. 2.00</p>
             </div>
-            <div class="item-remove">✖</div>
+
+            <div
+              class="flex items-center border-2 border-slate-100 rounded-full bg-white px-2"
+            >
+              <button
+                class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-medical-blue font-black text-xl transition-colors"
+              >
+                -
+              </button>
+              <span class="w-8 text-center font-bold text-slate-800">1</span>
+              <button
+                class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-medical-blue font-black text-xl transition-colors"
+              >
+                +
+              </button>
+            </div>
           </div>
 
-          <div class="cart-item">
-            <img src="img/ibuprofeno.jpg" alt="Ibuprofeno"/>
-            <div class="item-info">
-              <p>Ibuprofeno 800 mg Tableta Recubierta</p>
-              <span>S/. 15.00</span>
+          <div
+            class="bg-white rounded-[2rem] shadow-sm border border-slate-200 p-6 flex flex-col sm:flex-row items-center gap-6 relative group"
+          >
+            <button
+              class="absolute top-4 right-4 sm:relative sm:top-0 sm:right-0 w-8 h-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors"
+              title="Eliminar producto"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+
+            <div
+              class="w-24 h-24 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center p-2 flex-shrink-0"
+            >
+              <img
+                th:src="@{/img/ibuprofeno.jpg}"
+                alt="Ibuprofeno"
+                class="max-w-full max-h-full object-contain mix-blend-multiply"
+              />
             </div>
-            <div class="item-quantity">
-              <button>-</button>
-              <span>2</span>
-              <button>+</button>
+
+            <div class="flex-grow text-center sm:text-left">
+              <h3 class="font-bold text-slate-800 text-lg mb-1">
+                Ibuprofeno 800 mg Tableta Recubierta
+              </h3>
+              <p class="text-medical-blue font-black text-xl">S/. 15.00</p>
             </div>
-            <div class="item-remove">✖</div>
+
+            <div
+              class="flex items-center border-2 border-slate-100 rounded-full bg-white px-2"
+            >
+              <button
+                class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-medical-blue font-black text-xl transition-colors"
+              >
+                -
+              </button>
+              <span class="w-8 text-center font-bold text-slate-800">2</span>
+              <button
+                class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-medical-blue font-black text-xl transition-colors"
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="cart-summary">
-          <h3>Resumen</h3>
-          <p>Subtotal: <span>S/. 32.00</span></p>
-          <p>Envío: <span>Gratis</span></p>
-          <hr />
-          <h2>Total: S/. 32.00</h2>
-          <button class="checkout-btn" onclick="openTracking()">Finalizar Compra</button>
-          <button class="link" style="margin-top: 15px; background: none; border: 1px solid #0d4d8b; color: #0d4d8b;" onclick="openTracking()">Ver Seguimiento de mi pedido</button>
-        </div>
+        <aside class="w-full lg:w-1/3 flex-shrink-0">
+          <div
+            class="bg-slate-50 rounded-[2rem] border border-slate-200 p-8 sticky top-28"
+          >
+            <h3
+              class="text-xl font-black text-slate-800 mb-6 flex items-center gap-2"
+            >
+              <svg
+                class="w-5 h-5 text-medical-blue"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+              Resumen de Pedido
+            </h3>
+
+            <div class="space-y-4 mb-6 text-slate-600 font-medium">
+              <div class="flex justify-between items-center">
+                <span>Subtotal (3 artículos)</span>
+                <span class="font-bold text-slate-800">S/. 32.00</span>
+              </div>
+              <div class="flex justify-between items-center text-green-600">
+                <span>Costo de Envío</span>
+                <span
+                  class="font-bold uppercase tracking-wide text-xs bg-green-100 px-2 py-1 rounded-md"
+                  >¡Gratis!</span
+                >
+              </div>
+            </div>
+
+            <div class="border-t border-slate-200 pt-6 mb-8">
+              <div class="flex justify-between items-end">
+                <span class="text-sm font-bold text-slate-500"
+                  >Total a Pagar</span
+                >
+                <span class="text-3xl font-black text-medical-dark"
+                  >S/. 32.00</span
+                >
+              </div>
+            </div>
+
+            <button
+              class="w-full bg-medical-accent hover:bg-green-600 text-white font-black py-4 rounded-xl transition-all shadow-lg active:scale-95 mb-4 text-lg"
+            >
+              Finalizar Compra
+            </button>
+
+            <button
+              onclick="openTracking()"
+              class="w-full bg-white border-2 border-medical-blue text-medical-blue hover:bg-blue-50 font-bold py-3.5 rounded-xl transition-all shadow-sm flex justify-center items-center gap-2"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                ></path>
+              </svg>
+              Seguimiento de mi pedido
+            </button>
+          </div>
+        </aside>
       </div>
     </main>
 
-    <div id="trackingModal" class="modal">
-      <div class="modal-content" style="width: 450px;">
-        <span class="close" onclick="closeTracking()">&times;</span>
-        <h2 style="margin-bottom: 25px;">Estado de tu Pedido</h2>
-        
-        <div class="tracking-wrapper">
-          <div class="tracking-item completed">
-            <div class="tracking-icon">✔</div>
-            <div class="tracking-content">
-              <h4>Pedido Recibido</h4>
-              <p>Tu orden ha sido confirmada</p>
+    <div
+      id="trackingModal"
+      class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl relative"
+      >
+        <button
+          onclick="closeTracking()"
+          class="absolute top-5 right-5 text-slate-400 hover:text-red-500 text-2xl font-bold"
+        >
+          &times;
+        </button>
+
+        <div class="mb-8 border-b border-slate-100 pb-4">
+          <h2 class="text-2xl font-black text-slate-800">
+            Estado de tu Pedido
+          </h2>
+          <p class="text-medical-blue font-bold text-sm">Orden #BE-10492</p>
+        </div>
+
+        <div
+          class="relative pl-6 space-y-8 before:absolute before:inset-0 before:ml-10 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-slate-200"
+        >
+          <div class="relative flex items-start gap-6 group">
+            <div
+              class="absolute -left-6 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10 text-white text-xl"
+            >
+              ✔
+            </div>
+            <div class="pl-8">
+              <h4 class="font-black text-slate-800 text-lg">Pedido Recibido</h4>
+              <p class="text-sm text-slate-500 font-medium">
+                Tu orden ha sido confirmada
+              </p>
+              <span class="text-xs text-slate-400 mt-1 block">10:45 AM</span>
             </div>
           </div>
-          <div class="tracking-item active">
-            <div class="tracking-icon">📦</div>
-            <div class="tracking-content">
-              <h4>Preparando Pedido</h4>
-              <p>Estamos empaquetando tus productos</p>
+
+          <div class="relative flex items-start gap-6 group">
+            <div
+              class="absolute -left-6 w-12 h-12 bg-medical-blue rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10 text-white text-xl animate-pulse"
+            >
+              📦
+            </div>
+            <div class="pl-8">
+              <h4 class="font-black text-medical-blue text-lg">
+                Preparando Pedido
+              </h4>
+              <p class="text-sm text-slate-500 font-medium">
+                Estamos empaquetando tus productos
+              </p>
+              <span class="text-xs text-medical-blue font-bold mt-1 block"
+                >En proceso...</span
+              >
             </div>
           </div>
-          <div class="tracking-item">
-            <div class="tracking-icon">🚚</div>
-            <div class="tracking-content">
-              <h4>En Camino</h4>
-              <p>El motorizado está cerca de tu dirección</p>
+
+          <div class="relative flex items-start gap-6 group">
+            <div
+              class="absolute -left-6 w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10 text-slate-400 text-xl"
+            >
+              🚚
+            </div>
+            <div class="pl-8 opacity-50">
+              <h4 class="font-bold text-slate-600 text-lg">En Camino</h4>
+              <p class="text-sm text-slate-500 font-medium">
+                El motorizado está cerca de tu dirección
+              </p>
             </div>
           </div>
-          <div class="tracking-item">
-            <div class="tracking-icon">🏠</div>
-            <div class="tracking-content">
-              <h4>Entregado</h4>
-              <p>Pedido entregado con éxito</p>
+
+          <div class="relative flex items-start gap-6 group">
+            <div
+              class="absolute -left-6 w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center border-4 border-white shadow-sm z-10 text-slate-400 text-xl"
+            >
+              🏠
+            </div>
+            <div class="pl-8 opacity-50">
+              <h4 class="font-bold text-slate-600 text-lg">Entregado</h4>
+              <p class="text-sm text-slate-500 font-medium">
+                Pedido entregado con éxito
+              </p>
             </div>
           </div>
+        </div>
+
+        <button
+          onclick="closeTracking()"
+          class="mt-10 w-full bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl hover:bg-slate-200 transition-all"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="loginModal"
+      class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl relative"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-5 right-5 text-slate-400 hover:text-red-500 text-2xl font-bold"
+        >
+          &times;
+        </button>
+        <div
+          class="w-12 h-12 bg-medical-blue/10 text-medical-blue rounded-xl flex items-center justify-center mb-6 mx-auto"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            ></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-black text-slate-800 mb-6 text-center">
+          Acceso Seguro
+        </h2>
+        <div class="space-y-4">
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="Correo electrónico"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 px-4 focus:ring-2 focus:ring-medical-blue outline-none transition-all font-medium"
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Contraseña"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 px-4 focus:ring-2 focus:ring-medical-blue outline-none transition-all font-medium"
+          />
+          <button
+            onclick="validarLogin()"
+            class="w-full bg-medical-blue text-white font-bold py-3.5 rounded-xl hover:bg-medical-dark transition-all active:scale-95 shadow-md"
+          >
+            Ingresar a mi cuenta
+          </button>
+        </div>
+        <p class="text-center text-slate-500 mt-6 text-sm">
+          ¿Eres nuevo?
+          <button
+            onclick="openRegister()"
+            class="text-medical-blue font-bold hover:underline"
+          >
+            Regístrate aquí
+          </button>
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="registerModal"
+      class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl relative"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-5 right-5 text-slate-400 hover:text-red-500 text-2xl font-bold"
+        >
+          &times;
+        </button>
+        <h2 class="text-2xl font-black text-slate-800 mb-6 text-center">
+          Crear Cuenta
+        </h2>
+        <div class="space-y-4">
+          <input
+            type="text"
+            id="regNombre"
+            placeholder="Nombre completo"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-medical-blue outline-none transition-all font-medium"
+          />
+          <input
+            type="email"
+            id="regEmail"
+            placeholder="Correo electrónico"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-medical-blue outline-none transition-all font-medium"
+          />
+          <input
+            type="password"
+            id="regPassword"
+            placeholder="Contraseña"
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-medical-blue outline-none transition-all font-medium"
+          />
+          <button
+            onclick="validarRegistro()"
+            class="w-full bg-medical-blue text-white font-bold py-3.5 rounded-xl hover:bg-medical-dark transition-all active:scale-95 shadow-md"
+          >
+            Registrarme
+          </button>
         </div>
       </div>
     </div>
 
-    <div id="loginModal" class="modal">...</div>
-    <div id="registerModal" class="modal">...</div>
+    <footer
+      class="bg-medical-dark text-white pt-16 pb-8 mt-12 border-t-[6px] border-medical-blue"
+    >
+      <div
+        class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12"
+      >
+        <div class="lg:col-span-1">
+          <div class="flex items-center gap-2 mb-6">
+            <div
+              class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-medical-blue font-black text-xl"
+            >
+              ★
+            </div>
+            <span class="text-2xl font-black tracking-tight"
+              >Botica Estrella</span
+            >
+          </div>
+          <p class="text-blue-200/80 leading-relaxed text-sm">
+            Plataforma e-commerce farmacéutica de última generación. Cuidando tu
+            salud con tecnología, rapidez y confianza.
+          </p>
+        </div>
 
-    <footer class="footer">
-      <div class="footer-content">
-        <div><h3>Botica Estrella</h3><a href="#">Cuidando tu bienestar</a></div>
-        <div><h3>Contacto</h3><a href="#">+51 924 412 183</a></div>
-        <div><h3>Enlaces</h3><a href="nosotros.html">Sobre Nosotros</a></div>
+        <div>
+          <h3 class="text-lg font-bold mb-6 text-white tracking-wide">
+            Navegación
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                th:href="@{/}"
+                class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
+                >Inicio</a
+              >
+            </li>
+            <li>
+              <a
+                th:href="@{/productos}"
+                class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
+                >Catálogo de Productos</a
+              >
+            </li>
+            <li>
+              <a
+                th:href="@{/nosotros}"
+                class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
+                >Sobre Nosotros</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold mb-6 text-white tracking-wide">
+            Legal y Ayuda
+          </h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href="#"
+                class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
+                >Términos y Condiciones</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
+                >Políticas de Privacidad</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-blue-200 hover:text-white hover:underline transition-all text-sm"
+                >Libro de Reclamaciones</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold mb-6 text-white tracking-wide">
+            Contáctanos
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg
+                class="w-5 h-5 text-medical-blue shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                ></path>
+              </svg>
+              <div>
+                <p class="text-sm text-blue-200 block">Llámanos</p>
+                <p class="font-bold text-white">+51 924 412 183</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-bottom">© 2026 Botica Estrella+</div>
+      <div
+        class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-700/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <div class="text-slate-400 text-sm">
+          © 2026 Botica Estrella. Todos los derechos reservados.
+        </div>
+        <div class="text-slate-400 text-sm font-medium flex items-center gap-2">
+          <span>Desarrollado por</span>
+          <span
+            class="bg-white text-medical-dark px-2 py-0.5 rounded font-black text-xs tracking-wider"
+            >Equipo7</span
+          >
+        </div>
+      </div>
     </footer>
 
-    <script type="module" src="script.js"></script>
+    <script type="module" th:src="@{/js/script.js}"></script>
   </body>
 </html>
